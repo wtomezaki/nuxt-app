@@ -35,12 +35,12 @@ export default Vue.extend({
   margin: 15px 0;
   display: flex;
   flex-direction: row;
-  background-color: rgba(211, 211, 211, 0.5);
+  background-color: #fafafa;
 }
 
 .cardAvatar {
   width: 20%;
-  background-color: lightgray;
+  background-color: #bbbbbb;
   object-fit: contain;
 }
 

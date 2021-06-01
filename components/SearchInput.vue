@@ -38,6 +38,9 @@ export default Vue.extend({
   margin: 10px 0;
 }
 .searchInput {
+  background-color: #fafafa;
+  box-shadow: 1px 2px #c9c9c9;
+  border: none;
   width: 100%;
   padding: 8px 10px;
   font-size: 120%;
