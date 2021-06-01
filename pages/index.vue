@@ -1,34 +1,37 @@
 <template>
-  <div class="container">
-    <div>
-      <Logo />
-      <h1 class="title">bravado</h1>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          rel="noopener noreferrer"
-          class="button--grey"
-        >
-          GitHub
-        </a>
-      </div>
-    </div>
+  <div>
+    <input v-model="query" type="search" autocomplete="off" />
+
+    <ul v-if="users.length">
+      <li v-for="user of users" :key="user.email">
+        <div>{{ user.name }}</div>
+        <div>{{ user.email }}</div>
+        <div>{{ user.title }}</div>
+      </li>
+    </ul>
   </div>
 </template>
 
 <script lang="ts">
+import { IContentDocument } from '@nuxt/content/types/content'
 import Vue from 'vue'
 
-export default Vue.extend({})
+export default Vue.extend({
+  data(): { query: string; users: IContentDocument | IContentDocument[] } {
+    return {
+      query: '',
+      users: [],
+    }
+  },
+  watch: {
+    async query(query) {
+      this.users = await this.$content('').limit(10).search(query).fetch()
+    },
+  },
+  async mounted(): Promise<void> {
+    this.users = await this.$content('').limit(10).fetch()
+  },
+})
 </script>
 
 <style>
