@@ -1,20 +1,14 @@
 <template>
   <div class="body">
     <div class="container">
-      <div class="searchContainer">
-        <input
-          v-model="query"
-          class="searchInput"
-          type="search"
-          autocomplete="off"
-        />
-      </div>
+      <SearchInput v-model="query" />
 
       <div v-if="users.length" class="userList">
-        <div v-for="user of users" :key="user.email">
+        <div v-for="(user, index) of users" :key="index">
           <Card :user="user" />
         </div>
       </div>
+      <div v-else class="noResults"><h1>No results.</h1></div>
     </div>
   </div>
 </template>
@@ -58,22 +52,14 @@ export default Vue.extend({
   height: 80vh;
   width: 40%;
 }
-
-.searchContainer {
-  width: 100%;
-  position: relative;
-  top: 0;
-  height: 5%;
-  margin: 10px 0;
-}
-.searchInput {
-  width: 100%;
-  height: 100%;
-  font-size: 120%;
-}
-
 .userList {
   height: 95%;
   overflow-y: auto;
+}
+.noResults {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 </style>
