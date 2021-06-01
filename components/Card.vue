@@ -20,7 +20,7 @@ import Vue from 'vue'
 export default Vue.extend({
   name: 'Card',
   props: {
-    user: { type: any, default: {} },
+    user: { type: Object, required: true },
   },
 })
 </script>
