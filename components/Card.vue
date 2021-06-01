@@ -1,15 +1,19 @@
 <template>
   <div class="card">
     <img :src="user.avatar" class="cardAvatar" />
-    <div class="cardContent"></div>
-    <div class="cardTitle">
-      <h2>{{ user.name }}</h2>
-    </div>
-    <div class="cardEmail">
-      <h4>{{ user.email }}</h4>
-    </div>
-    <div class="cardSubtitle">
-      <h4>{{ user.title }}</h4>
+    <div class="cardContent">
+      <div class="cardTitle">
+        <h2>{{ user.name }}</h2>
+      </div>
+      <div class="cardSubtitle">
+        <h4>{{ user.title }}</h4>
+      </div>
+      <div class="cardAddress">
+        <p>{{ user.address }}, {{ user.city }}</p>
+      </div>
+      <div class="cardEmail">
+        <p>{{ user.email }}</p>
+      </div>
     </div>
   </div>
 </template>
