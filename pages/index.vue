@@ -11,18 +11,8 @@
       </div>
 
       <div v-if="users.length" class="userList">
-        <div v-for="user of users" :key="user.email" class="card">
-          <img :src="user.avatar" class="cardAvatar" />
-          <div class="cardContent"></div>
-          <div class="cardTitle">
-            <h2>{{ user.name }}</h2>
-          </div>
-          <div class="cardEmail">
-            <h4>{{ user.email }}</h4>
-          </div>
-          <div class="cardSubtitle">
-            <h4>{{ user.title }}</h4>
-          </div>
+        <div v-for="user of users" :key="user.email">
+          <Card :user="user" />
         </div>
       </div>
     </div>
@@ -85,24 +75,5 @@ export default Vue.extend({
 .userList {
   height: 95%;
   overflow-y: auto;
-}
-
-.card {
-  height: 120px;
-  margin: 15px 0;
-  display: flex;
-  flex-direction: row;
-  background-color: rgba(211, 211, 211, 0.5);
-}
-
-.cardAvatar {
-  width: 20%;
-  background-color: lightgray;
-  object-fit: contain;
-}
-
-.cardContent {
-  /* width: 80%; */
-  padding: 15px 10px;
 }
 </style>
