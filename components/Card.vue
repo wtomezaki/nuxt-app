@@ -3,20 +3,24 @@
   <div class="card">
     <img :src="user.avatar" class="cardAvatar" />
     <div class="cardContent">
-      <div class="cardEmail">
-        <p v-html="highlight(user.email)"></p>
+      <div class="cardInfo">
+        <div class="cardEmail">
+          <p v-html="highlight(user.email)"></p>
+        </div>
+        <div class="cardTitle">
+          <h2 v-html="highlight(user.name)"></h2>
+        </div>
+        <div class="cardSubtitle">
+          <h4 v-html="highlight(user.title)"></h4>
+        </div>
+        <div class="cardAddress">
+          <p v-html="highlight(user.address + ', ' + user.city)"></p>
+        </div>
       </div>
-      <div class="cardTitle">
-        <h2 v-html="highlight(user.name)"></h2>
-      </div>
-      <div class="cardSubtitle">
-        <h4 v-html="highlight(user.title)"></h4>
-      </div>
-      <div class="cardAddress">
-        <p v-html="highlight(user.address + ', ' + user.city)"></p>
+      <div class="cardAction">
+        <Button text="asd" @click="$emit('click', user)" />
       </div>
     </div>
-    <div class="cardButton"></div>
   </div>
 </template>
 
@@ -28,6 +32,7 @@ export default Vue.extend({
   props: {
     user: { type: Object, required: true },
     query: { type: String, required: true, default: '' },
+    selected: { type: Object, required: false, default: null },
   },
   methods: {
     highlight(content: string): string {
@@ -63,6 +68,15 @@ p {
 .cardContent {
   width: 80%;
   padding: 10px 10px 10px 30px;
+  display: flex;
+  flex-direction: column;
+}
+.cardInfo {
+  height: 70%;
+}
+.cardAction {
+  border-top: 1px solid #bbbbbb;
+  height: 30%;
 }
 .cardEmail {
   position: relative;
