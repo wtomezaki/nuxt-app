@@ -2,6 +2,9 @@
   <div class="card">
     <img :src="user.avatar" class="cardAvatar" />
     <div class="cardContent">
+      <div class="cardEmail">
+        <p>{{ user.email }}</p>
+      </div>
       <div class="cardTitle">
         <h2>{{ user.name }}</h2>
       </div>
@@ -11,10 +14,8 @@
       <div class="cardAddress">
         <p>{{ user.address }}, {{ user.city }}</p>
       </div>
-      <div class="cardEmail">
-        <p>{{ user.email }}</p>
-      </div>
     </div>
+    <div class="cardButton"></div>
   </div>
 </template>
 
@@ -30,6 +31,10 @@ export default Vue.extend({
 </script>
 
 <style>
+h4,
+p {
+  color: #727272;
+}
 .card {
   height: 120px;
   margin: 15px 0;
@@ -45,7 +50,13 @@ export default Vue.extend({
 }
 
 .cardContent {
-  /* width: 80%; */
-  padding: 15px 10px;
+  width: 80%;
+  padding: 10px 10px 10px 30px;
+}
+
+.cardEmail {
+  position: relative;
+  top: 0;
+  float: right;
 }
 </style>
