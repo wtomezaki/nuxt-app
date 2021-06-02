@@ -1,5 +1,6 @@
 <template>
   <div class="searchContainer">
+    <i class="searchIcon"><font-awesome-icon :icon="['fas', 'search']" /></i>
     <input
       class="searchInput"
       type="search"
@@ -22,7 +23,7 @@ export default Vue.extend({
     listeners() {
       return {
         ...this.$listeners,
-        input: (event) => this.$emit('input', event.target.value),
+        input: (event: any): void => this.$emit('input', event.target.value),
       }
     },
   },
@@ -42,7 +43,12 @@ export default Vue.extend({
   box-shadow: 1px 2px #c9c9c9;
   border: none;
   width: 100%;
-  padding: 8px 10px;
+  padding: 8px 10px 8px 35px;
   font-size: 120%;
+}
+.searchIcon {
+  position: absolute;
+  left: 10px;
+  top: 9px;
 }
 </style>
