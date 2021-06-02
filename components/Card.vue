@@ -45,6 +45,7 @@ p {
 
 .cardAvatar {
   width: 20%;
+  max-width: 300px;
   background-color: #bbbbbb;
   object-fit: contain;
 }
@@ -58,5 +59,9 @@ p {
   position: relative;
   top: 0;
   float: right;
+}
+
+.cardSubtitle {
+  margin-bottom: 2px;
 }
 </style>
