@@ -20,7 +20,11 @@ export default Vue.extend({
   },
   watch: {
     async query(query) {
-      this.users = await this.$content('').limit(20).search(query).fetch()
+      this.users = await this.$content('')
+        .limit(20)
+        .sortBy('name', 'asc')
+        .search(query)
+        .fetch()
     },
   },
   async mounted(): Promise<void> {
