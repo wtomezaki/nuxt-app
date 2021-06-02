@@ -1,18 +1,19 @@
+<!-- eslint-disable vue/no-v-html -->
 <template>
   <div class="card">
     <img :src="user.avatar" class="cardAvatar" />
     <div class="cardContent">
       <div class="cardEmail">
-        <p>{{ user.email }}</p>
+        <p v-html="highlight(user.email)"></p>
       </div>
       <div class="cardTitle">
-        <h2>{{ user.name }}</h2>
+        <h2 v-html="highlight(user.name)"></h2>
       </div>
       <div class="cardSubtitle">
-        <h4>{{ user.title }}</h4>
+        <h4 v-html="highlight(user.title)"></h4>
       </div>
       <div class="cardAddress">
-        <p>{{ user.address }}, {{ user.city }}</p>
+        <p v-html="highlight(user.address + ', ' + user.city)"></p>
       </div>
     </div>
     <div class="cardButton"></div>
@@ -26,6 +27,17 @@ export default Vue.extend({
   name: 'Card',
   props: {
     user: { type: Object, required: true },
+    query: { type: String, required: true, default: '' },
+  },
+  methods: {
+    highlight(content: string): string {
+      if (!this.query) {
+        return content
+      }
+      return content.replace(new RegExp(this.query, 'gi'), (match) => {
+        return '<span class="highlightText">' + match + '</span>'
+      })
+    },
   },
 })
 </script>
@@ -42,26 +54,25 @@ p {
   flex-direction: row;
   background-color: #fafafa;
 }
-
 .cardAvatar {
   width: 20%;
   max-width: 300px;
   background-color: #bbbbbb;
   object-fit: contain;
 }
-
 .cardContent {
   width: 80%;
   padding: 10px 10px 10px 30px;
 }
-
 .cardEmail {
   position: relative;
   top: 0;
   float: right;
 }
-
 .cardSubtitle {
   margin-bottom: 2px;
+}
+.highlightText {
+  background: yellow;
 }
 </style>
