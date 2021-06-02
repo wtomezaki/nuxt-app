@@ -1,7 +1,7 @@
 <template>
   <div v-if="users.length" class="userList">
     <div v-for="(user, index) of users" :key="index">
-      <Card :user="user" />
+      <Card :user="user" :query="query" />
     </div>
   </div>
   <div v-else class="noResults"><h1>No results.</h1></div>
@@ -14,6 +14,7 @@ export default Vue.extend({
   name: 'UserList',
   props: {
     users: { type: Array, required: true },
+    query: { type: String, required: false, default: '' },
   },
 })
 </script>

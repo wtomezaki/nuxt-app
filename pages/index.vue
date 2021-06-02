@@ -2,7 +2,7 @@
   <div class="body">
     <div class="container">
       <SearchInput v-model="query" />
-      <UserList :users="users" />
+      <UserList :users="users" :query="query" />
     </div>
   </div>
 </template>
