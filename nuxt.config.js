@@ -20,6 +20,12 @@ export default {
     fullTextSearchFields: ['name', 'email', 'title', 'address', 'city'],
   },
 
+  fontawesome: {
+    icons: {
+      solid: true,
+    },
+  },
+
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [],
 
@@ -33,6 +39,7 @@ export default {
   buildModules: [
     // https://go.nuxtjs.dev/typescript
     '@nuxt/typescript-build',
+    '@nuxtjs/fontawesome',
   ],
 
   // Modules: https://go.nuxtjs.dev/config-modules
