@@ -1,6 +1,6 @@
 <!-- eslint-disable vue/no-v-html -->
 <template>
-  <div class="card">
+  <div class="card" :class="{ selected: isSelected }">
     <img :src="user.avatar" class="cardAvatar" />
     <div class="cardContent">
       <div class="cardInfo">
@@ -18,7 +18,10 @@
         </div>
       </div>
       <div class="cardAction">
-        <Button text="asd" @click="$emit('click', user)" />
+        <Button
+          :text="isSelected ? 'SKIP SELECTION' : 'MARK AS SIUTABLE'"
+          @click="$nuxt.$emit('userClicked', user)"
+        />
       </div>
     </div>
   </div>
@@ -31,8 +34,13 @@ export default Vue.extend({
   name: 'Card',
   props: {
     user: { type: Object, required: true },
-    query: { type: String, required: true, default: '' },
-    selected: { type: Object, required: false, default: null },
+    query: { type: String, required: true },
+    selected: { type: String, required: true },
+  },
+  computed: {
+    isSelected() {
+      return this.selected === this.user.email
+    },
   },
   methods: {
     highlight(content: string): string {
@@ -53,6 +61,7 @@ p {
   color: #727272;
 }
 .card {
+  border-radius: 5px;
   height: 120px;
   margin: 15px 0;
   display: flex;
@@ -64,6 +73,7 @@ p {
   max-width: 300px;
   background-color: #bbbbbb;
   object-fit: contain;
+  border-radius: 5px 0 0 5px;
 }
 .cardContent {
   width: 80%;
@@ -83,10 +93,16 @@ p {
   top: 0;
   float: right;
 }
+.cardTitle {
+  text-overflow: ellipsis;
+}
 .cardSubtitle {
   margin-bottom: 2px;
 }
 .highlightText {
   background: yellow;
+}
+.selected {
+  border: 1px solid blue;
 }
 </style>
