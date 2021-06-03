@@ -1,6 +1,6 @@
 <template>
-  <button class="button" @click="$emit('click', undefined)">
-    {{ text.toUpperCase() }}
+  <button type="button" class="button" @click="$emit('click')">
+    {{ text }}
   </button>
 </template>
 
@@ -19,11 +19,10 @@ export default Vue.extend({
 .button {
   padding: 5px 10px;
   border: none;
-  max-width: 64px;
   background-color: transparent;
   color: #1fa296;
-  font-size: 1.2em;
-  font-weight: bold;
+  font-size: 1.05em;
+  font-weight: 600;
   text-align: center;
 }
 </style>
