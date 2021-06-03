@@ -1,7 +1,7 @@
 <template>
   <div v-if="users.length" class="userList">
     <div v-for="(user, index) of users" :key="index">
-      <Card :user="user" :query="query" />
+      <Card :user="user" :query="query" :selected="selected" />
     </div>
   </div>
   <div v-else class="noResults"><h1>No results.</h1></div>
@@ -15,6 +15,7 @@ export default Vue.extend({
   props: {
     users: { type: Array, required: true },
     query: { type: String, required: false, default: '' },
+    selected: { type: String, required: true },
   },
 })
 </script>
