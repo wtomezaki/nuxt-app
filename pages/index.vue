@@ -2,7 +2,7 @@
   <div class="body">
     <div class="container">
       <SearchInput v-model="query" />
-      <UserList :users="users" :query="query" />
+      <UserList :users="users" :query="query" :selected="selected" />
     </div>
   </div>
 </template>
@@ -11,24 +11,53 @@
 import { IContentDocument } from '@nuxt/content/types/content'
 import Vue from 'vue'
 
+interface User {
+  name: string
+  email: string
+  title: string
+  city: string
+  address: string
+  avatar: string
+}
+
 export default Vue.extend({
-  data(): { query: string; users: IContentDocument | IContentDocument[] } {
+  data(): {
+    query: string
+    users: IContentDocument | IContentDocument[]
+    selected?: string
+  } {
     return {
       query: '',
       users: [],
+      selected: '',
     }
   },
   watch: {
     async query(query) {
-      this.users = await this.$content('')
-        .limit(20)
-        .sortBy('name', 'asc')
-        .search(query)
-        .fetch()
+      this.users = await this.getContent().search(query).fetch()
     },
   },
   async mounted(): Promise<void> {
-    this.users = await this.$content('').limit(20).fetch()
+    this.users = await this.getContent()
+      .search(this.$route.params.query || '')
+      .fetch()
+  },
+  created(): void {
+    this.$nuxt.$on('userClicked', (user: User) => {
+      if (this.selected === user?.email) {
+        this.selected = ''
+      } else {
+        this.selected = user.email
+      }
+    })
+  },
+  beforeDestroy() {
+    this.$nuxt.$off('userClicked')
+  },
+  methods: {
+    getContent() {
+      return this.$content('').limit(20).sortBy('name', 'asc')
+    },
   },
 })
 </script>
@@ -69,7 +98,7 @@ export default Vue.extend({
 }
 @media only screen and (min-width: 1200px) {
   .container {
-    width: 50%;
+    width: 65%;
   }
 }
 @media only screen and (min-width: 1920px) {
